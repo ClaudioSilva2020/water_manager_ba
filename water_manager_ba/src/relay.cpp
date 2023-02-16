@@ -10,6 +10,7 @@
  */
 #include "relay.h"
 
+//implementação da função
 void config_relay(relay_t *config_relay)
 {
     // COLOCA O CÓDIGO AQUI...

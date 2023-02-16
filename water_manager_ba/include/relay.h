@@ -11,16 +11,19 @@
 #ifndef __RELAY_H__
 #define __RELAY_H__
 
+#include <Arduino.h>
+
 
 #define RELAY_PIN GPIO2
 
+//estrutura de configuração
 struct relay
 {
     int pin;
     int initial_state;
 }relay_t;
 
-
+// protótipo da função
 void config_relay(relay_t *config_relay);
 
 #endif
