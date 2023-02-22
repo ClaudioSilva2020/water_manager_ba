@@ -15,16 +15,26 @@
 
 
 #define RELAY_PIN GPIO2
+#define RELAY_OUTPUT OUTPUT
+
+
+typedef enum relay_state
+{
+    OFF = LOW,
+    ON = HIGH 
+}relay_state_t ;
 
 //estrutura de configuração
-struct relay
+typedef struct relay
 {
-    int pin;
-    int initial_state;
+    uint8_t pin;
+    relay_state_t state;
 }relay_t;
 
 // protótipo da função
-void config_relay(relay_t *config_relay);
+int8_t config_relay(relay_t *config_relay);
+void relay_turnon(); //Função que liga o rele
+void relay_turnoff(); //Função que desliga o rele
 
 #endif
 
