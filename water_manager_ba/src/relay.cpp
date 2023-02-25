@@ -31,9 +31,9 @@ int8_t config_relay(relay_t *config_relay)
 
 void relay_turnon()
 {
-
+    digitalWrite(RELAY_PIN, ON);
 }
 void relay_turnoff()
 {
-    
+    digitalWrite(RELAY_PIN, OFF);
 }
