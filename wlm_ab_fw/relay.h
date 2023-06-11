@@ -13,8 +13,13 @@
 
 #include <Arduino.h>
 
+#define GPIO0   0
+#define GPIO1   1
+#define GPIO2   2
+#define GPIO3   3
 
-#define RELAY_PIN GPIO2
+
+#define RELAY_PIN GPIO0
 #define RELAY_OUTPUT OUTPUT
 
 
@@ -24,17 +29,16 @@ typedef enum relay_state
     ON = HIGH 
 }relay_state_t ;
 
-//estrutura de configuração
-typedef struct relay
-{
-    uint8_t pin;
-    relay_state_t state;
-}relay_t;
 
-// protótipo da função
-int8_t config_relay(relay_t *config_relay);
-void relay_turnon(); //Função que liga o rele
-void relay_turnoff(); //Função que desliga o rele
+class relay
+{
+    private:
+        int _pin;
+    public:
+        relay(int pin);
+        ~relay();
+        void relay_turnon(); //Função que liga o rele
+        void relay_turnoff(); //Função que desliga o rele
+};
 
 #endif
-
