@@ -35,6 +35,8 @@ class relay
     private:
         int _pin;
     public:
+        relay_state_t state;
+    
         relay(int pin);
         ~relay();
         void relay_turnon(); //Função que liga o rele
