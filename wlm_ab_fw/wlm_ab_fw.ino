@@ -12,6 +12,15 @@ const char* mqtt_password = "wlm123";
 CommManager commManager(SSID_P, PASSWORD, mqttServer, mqttPort, mqtt_username, mqtt_password);
 relay bomba(RELAY_PIN); 
 
+
+/**
+ * @brief 
+ * * Função callback para requisições MQTT
+ * 
+ * @param topic  Tópico MQTT do projeto active_pump
+ * @param payload Mensagem 
+ * @param length  Tamanho da menagem
+ */
 void callback(char* topic, byte* payload, unsigned int length) 
 {
   Serial.print("Mensagem recebida [");
@@ -24,7 +33,7 @@ void callback(char* topic, byte* payload, unsigned int length)
   {
     message += (char) payload[i];
   }
-  Serial.print(receivedChar);
+  Serial.println(message);
 
   if (message == "on" && !bomba.state)
   {

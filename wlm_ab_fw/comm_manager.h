@@ -15,34 +15,97 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-#define SSID_P      "claudiocell"
-#define PASSWORD    "detamms2"
+#define SSID_P      "Claudio_2.4G"
+#define PASSWORD    "********"
 
 
 
 class CommManager
 {
     private:
-        WiFiClient espClient;
-        PubSubClient client(espClient);      
         const char* ssid;
         const char* password;
         const char* mqttServer;
         const char* mqtt_username;
         const char* mqtt_password; 
         const int mqttPort;
-        void connect();
     public:
+        /**
+         * @brief Construct a new Comm Manager object
+         * 
+         * @param ssid 
+         * @param password 
+         * @param mqttServer 
+         * @param mqttPort 
+         * @param mqtt_username 
+         * @param mqtt_password 
+         */
         CommManager(const char* ssid, const char* password, const char* mqttServer, const int mqttPort, const char* mqtt_username, const char* mqtt_password);
+        /**
+         * @brief Destroy the Comm Manager object
+         * 
+         */
         ~CommManager();
+        /**
+         * @brief 
+         * * Inicia wifi e MQTT 
+         * ! Não idicada pro uso
+         */
         void begin();
+        /**
+         * @brief 
+         * * Inicializa o WIFI
+         */
         void wifi_init();
+        /**
+         * @brief 
+         * * Inicializa mqtt
+         * 
+         */
         void mqtt_init();
+        /**
+         * @brief 
+         * 
+         * @return true 
+         * @return false 
+         */
         bool isConnected();
+        /**
+         * @brief 
+         * 
+         */
+        void connect();
+        /**
+         * @brief 
+         * 
+         */
         void loop();
+        /**
+         * @brief 
+         * 
+         */
         void test_conn();
+        /**
+         * @brief 
+         * 
+         * @param topic 
+         * @param payload 
+         * @return true 
+         * @return false 
+         */
         bool publish(const char* topic, const char* payload);
+        /**
+         * @brief 
+         * 
+         * @param topic 
+         * @return true 
+         * @return false 
+         */
         bool subscribe(const char* topic);
+        /**
+         * @brief Set the Callback object
+         * 
+         */
         void setCallback(MQTT_CALLBACK_SIGNATURE);
 };
 #endif

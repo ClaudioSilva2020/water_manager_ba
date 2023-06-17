@@ -13,6 +13,9 @@
 
 #include <ESP8266WiFi.h>
 
+WiFiClient espClient;
+PubSubClient client(espClient); 
+
 
 CommManager::CommManager(const char* ssid, const char* password, const char* mqttServer, const int mqttPort, const char* mqtt_username, const char* mqtt_password)
     : ssid(ssid), password(password), mqttServer(mqttServer), mqttPort(mqttPort) , mqtt_username(mqtt_username), mqtt_password(mqtt_password)
