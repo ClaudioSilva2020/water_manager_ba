@@ -15,10 +15,11 @@
 relay::relay(int pin)
 {   
     _pin = pin;
+    state = OFF;
 
     pinMode(pin, RELAY_OUTPUT);
 
-    digitalWrite(pin, OFF);
+    digitalWrite(pin, state);
 }
 
 relay::~relay()
@@ -28,10 +29,12 @@ relay::~relay()
 
 void relay::relay_turnon()
 {
-    digitalWrite(_pin, ON);
+    digitalWrite(_pin, OFF);
+    state = ON;
 }
 
 void relay::relay_turnoff()
 {
-    digitalWrite(_pin, OFF);
+    digitalWrite(_pin, ON);
+    state = OFF;
 }
