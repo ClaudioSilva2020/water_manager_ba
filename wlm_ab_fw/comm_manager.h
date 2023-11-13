@@ -15,8 +15,8 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-#define SSID_P      "Claudio_2.4G"
-#define PASSWORD    "********"
+#define SSID_P      "claudiocell"
+#define PASSWORD    "detamms2"
 
 
 

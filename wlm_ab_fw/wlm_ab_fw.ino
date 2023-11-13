@@ -1,5 +1,8 @@
 #include <ESP8266WiFi.h>
+#include <ESPAsyncTCP.h>
+#include <ESPAsyncWebServer.h>
 #include <PubSubClient.h>
+#include <FS.h>
 #include "comm_manager.h"
 #include "relay.h"
 
@@ -12,6 +15,7 @@ const char* mqtt_password = "wlm123";
 CommManager commManager(SSID_P, PASSWORD, mqttServer, mqttPort, mqtt_username, mqtt_password);
 relay bomba(RELAY_PIN); 
 
+AsyncWebServer server(80);
 
 /**
  * @brief 
@@ -55,21 +59,46 @@ void setup()
   Serial.begin(115200);
   delay(1000);
   
+  if(!SPIFFS.begin()){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+
+ 
+  
   commManager.wifi_init();
   bomba.relay_turnoff();
-  commManager.mqtt_init();
-  commManager.setCallback(callback);
-  commManager.connect();
+//  commManager.mqtt_init();
+//  commManager.setCallback(callback);
+//  commManager.connect();
+//
+//  commManager.publish(topic, "join in WLM");
+//  commManager.subscribe(topic);
 
-  commManager.publish(topic, "join in WLM");
-  commManager.subscribe(topic);
+     // Route for root / web page
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/index.html", String(), false);
+  });
+  
+  // Route to load style.css file
+  server.on("/style/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/style/style.css", "text/css");
+  });
+
+   // Route to load style.css file
+  server.on("/style/reset.css", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/style/reset.css", "text/css");
+  });
+
+  // Start server
+  server.begin();
 }
 
 void loop() 
 {
-  commManager.loop();
+//  commManager.loop();
   
   
-  delay(100);
+//  delay(100);
   
 }

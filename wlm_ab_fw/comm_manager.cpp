@@ -56,6 +56,8 @@ void CommManager::wifi_init()
         Serial.println("Conectando ao wifi ...");
     }
     Serial.println("Conectado ao wifi");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
 }
 
 void CommManager::mqtt_init()
