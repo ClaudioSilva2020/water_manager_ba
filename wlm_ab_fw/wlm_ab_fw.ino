@@ -76,8 +76,13 @@ void setup()
 //  commManager.subscribe(topic);
 
      // Route for root / web page
+
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html", String(), false);
+  });
+
+  server.on("/assets/logo.jpeg", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/logo.jpeg", "image/png");
   });
   
   // Route to load style.css file
