@@ -16,7 +16,7 @@
 #include <PubSubClient.h>
 
 #define SSID_P      "brisa-3493347"
-#define PASSWORD    "urkgtqrb"
+#define PASSWORD    "*********"
 
 
 
