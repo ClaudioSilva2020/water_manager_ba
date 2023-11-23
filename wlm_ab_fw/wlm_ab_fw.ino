@@ -68,12 +68,12 @@ void setup()
   
   commManager.wifi_init();
   bomba.relay_turnoff();
-//  commManager.mqtt_init();
-//  commManager.setCallback(callback);
-//  commManager.connect();
-//
-//  commManager.publish(topic, "join in WLM");
-//  commManager.subscribe(topic);
+  commManager.mqtt_init();
+  commManager.setCallback(callback);
+  commManager.connect();
+
+  commManager.publish(topic, "join in WLM");
+  commManager.subscribe(topic);
 
      // Route for root / web page
 
@@ -81,8 +81,8 @@ void setup()
     request->send(SPIFFS, "/index.html", String(), false);
   });
 
-  server.on("/assets/logo.jpeg", HTTP_GET, [](AsyncWebServerRequest *request){
-    request->send(SPIFFS, "/logo.jpeg", "image/png");
+  server.on("/logo", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/assets/logo.jpeg", "image/png");
   });
   
   // Route to load style.css file
@@ -101,9 +101,9 @@ void setup()
 
 void loop() 
 {
-//  commManager.loop();
+  commManager.loop();
   
   
-//  delay(100);
+  delay(100);
   
 }
